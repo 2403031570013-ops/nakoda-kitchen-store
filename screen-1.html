@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "secondary-container": "#fe956a", "surface-container-high": "#ede7e5", "on-tertiary-container": "#090400", "tertiary-container": "#96711f", "surface-container-highest": "#e7e1df", "on-error": "#ffffff", "inverse-surface": "#32302f", "on-surface": "#1d1b1a", "on-error-container": "#93000a", "primary-fixed": "#ffdbce", "on-background": "#1d1b1a", "surface-container-low": "#f8f2f0", "surface-container-lowest": "#ffffff", "inverse-primary": "#ffb598", "surface-dim": "#ded9d7", "surface-bright": "#fef8f6", "on-primary-fixed": "#370e00", "tertiary": "#7b5802", "on-primary-fixed-variant": "#7b2f0a", "on-primary-container": "#ffffff", "surface-container": "#f2edeb", "on-tertiary-fixed": "#261900", "background": "#fef8f6", "on-surface-variant": "#55433c", "primary": "#994520", "secondary-fixed": "#ffdbce", "on-secondary-fixed-variant": "#7a2f0b", "tertiary-fixed": "#ffdea4", "error-container": "#ffdad6", "secondary-fixed-dim": "#ffb598", "on-secondary": "#ffffff", "on-tertiary-fixed-variant": "#5d4200", "surface-tint": "#994621", "primary-fixed-dim": "#ffb598", "on-secondary-container": "#762c08", "outline-variant": "#dbc1b8", "surface": "#fef8f6", "primary-container": "#b85d36", "on-primary": "#ffffff", "error": "#ba1a1a", "on-tertiary": "#ffffff", "inverse-on-surface": "#f5efed", "on-secondary-fixed": "#370e00", "tertiary-fixed-dim": "#eec067", "outline": "#88726a", "secondary": "#994621", "surface-variant": "#e7e1df" }, borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, spacing: { "space-2xs": "0.25rem", "space-2xl": "3rem", "gutter-mobile": "16px", "space-sm": "0.75rem", "space-xl": "2rem", "space-4xl": "6rem", "space-3xl": "4.5rem", "gutter-desktop": "24px", "space-md": "1rem", "space-lg": "1.5rem", "space-xs": "0.5rem", "container-max": "1360px" }, fontFamily: { "label-md": ["Plus Jakarta Sans", "sans-serif"], "body-lg": ["Plus Jakarta Sans", "sans-serif"], "headline-lg": ["Playfair Display", "serif"], "body-md": ["Plus Jakarta Sans", "sans-serif"], "label-sm": ["Plus Jakarta Sans", "sans-serif"], "body-sm": ["Plus Jakarta Sans", "sans-serif"], "headline-md": ["Playfair Display", "serif"], "display-lg-mobile": ["Playfair Display", "serif"], "title-lg": ["Plus Jakarta Sans", "sans-serif"], "price-lg": ["Plus Jakarta Sans", "sans-serif"], "title-md": ["Plus Jakarta Sans", "sans-serif"], "headline-lg-mobile": ["Playfair Display", "serif"], "price-sm": ["Plus Jakarta Sans", "sans-serif"], "display-lg": ["Playfair Display", "serif"] }, fontSize: { "label-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0.04em", "fontWeight": "600" }], "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }], "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "500" }], "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }], "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600" }], "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "500" }], "display-lg-mobile": ["34px", { "lineHeight": "42px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "title-lg": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "price-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }], "headline-lg-mobile": ["26px", { "lineHeight": "34px", "fontWeight": "500" }], "price-sm": ["15px", { "lineHeight": "20px", "fontWeight": "700" }], "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600" }] } } } }</script></head><body class="bg-surface text-on-surface font-body-md text-body-md flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="bg-primary-fixed text-on-primary-fixed py-space-2xs px-gutter-mobile text-center overflow-hidden"><p class="font-label-sm text-label-sm uppercase tracking-wider font-semibold truncate">HOME DELIVERY AVAILABLE • CASH ON DELIVERY • EASY WHATSAPP ORDERING</p></div><div class="h-20 px-gutter-mobile flex items-center justify-between gap-space-xs"><div class="flex items-center gap-space-xs"><img alt="Nakoda Brand Wordmark Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XQSZdGJHUvWaHptyeDvyY1ToNCx_MVxCQ85w-mI3x3_l3aGm1kVGbOhXDflKr3u2sUdkxgBUEQnGo7PY63sVQxe81Y4Rg99uoeKL_Q-oUmBn6OMnF3QdCl9afocggutCNpqbYNZL1XnQ7yjGYs60ImsX5ayhli9vQIdR-BZlJFLlFKLdjyzDncunJrkpdzFrl9VMlCSpp-slWn9zbq7V8RKOVrq9qbq02O3uBf-sstsmGaESRuX8QwJZ4"/><div class="flex flex-col"><span class="font-title-md text-title-md text-on-surface leading-tight">Nakoda</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-none">Kitchen • Home • Everyday</span></div></div><div class="flex items-center gap-space-2xs"><button aria-label="Search Products" class="w-11 h-11 flex items-center justify-center text-on-surface hover:text-primary transition-colors"><span class="material-symbols-outlined text-[22px]">search</span></button><a aria-label="Wishlist" class="relative w-11 h-11 flex items-center justify-center text-on-surface hover:text-primary transition-colors" data-path="wishlist" href="#"><span class="material-symbols-outlined text-[22px]">favorite</span><span class="absolute top-1.5 right-1.5 min-w-[16px] h-4 px-1 bg-primary text-on-primary rounded-full font-label-sm text-[10px] leading-4 text-center font-bold flex items-center justify-center">2</span></a><a aria-label="Cart" class="relative w-11 h-11 flex items-center justify-center text-on-surface hover:text-primary transition-colors" data-path="shopping-cart" href="#"><span class="material-symbols-outlined text-[22px]">shopping_bag</span><span class="absolute top-1.5 right-1.5 min-w-[16px] h-4 px-1 bg-primary text-on-primary rounded-full font-label-sm text-[10px] leading-4 text-center font-bold flex items-center justify-center">3</span></a><a href="/account" aria-label="Account" class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ml-space-2xs"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></a></div></div></header><main class="flex flex-col relative w-full pt-20 pb-space-4xl bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- HERO SECTION -->
+<section class="flex flex-col px-gutter-mobile pt-space-md pb-space-xl bg-surface-container-lowest">
+<div class="flex flex-col gap-space-xs">
+<!-- Eyebrow Pill -->
+<div class="flex items-center gap-1.5 self-start px-3 py-1 bg-surface-container-high rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">THE NAKODA COLLECTION • RETAIL STORE</span>
+</div>
+<!-- Headline -->
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-on-surface mt-space-2xs leading-tight">
+        Everything Your Kitchen Needs. And Everything Your Home Loves.
+      </h1>
+<!-- Editorial Subcopy -->
+<p class="font-body-md text-body-md text-on-surface-variant">
+        Discover kitchenware, appliances, storage, cleaning essentials, and everyday domestic products — curated meticulously under one roof.
+      </p>
+<!-- Trust Badges -->
+<div class="flex flex-wrap items-center gap-2 pt-space-2xs">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 bg-surface-container rounded-full text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px] text-tertiary">schedule</span>
+          10 AM — 10 PM Everyday
+        </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+          FAST HOME DELIVERY &amp; COD
+        </span>
+</div>
+<!-- Dual CTAs -->
+<div class="flex flex-col gap-2.5 mt-space-sm">
+<a class="w-full h-12 bg-inverse-surface hover:bg-on-surface active:scale-[0.99] transition-all rounded-full flex items-center justify-center gap-2 text-inverse-on-surface font-label-md text-label-md shadow-md" data-path="product-catalog" href="#">
+<span>SHOP THE COLLECTION</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+<a class="w-full h-12 bg-surface-container hover:bg-surface-container-high text-primary active:scale-[0.99] transition-all rounded-full flex items-center justify-center gap-2 font-label-md text-label-md" href="https://wa.me/919829741206?text=Hi%20Nakoda%20Kitchenware,%20I%20want%20to%20explore%20your%20latest%20catalog" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[#25D366] text-[20px]">chat</span>
+<span>ORDER ON WHATSAPP</span>
+</a>
+</div>
+<!-- Collage Preview Card -->
+<div class="relative mt-space-md w-full rounded-2xl overflow-hidden bg-surface-container-low shadow-sm">
+<div class="grid grid-cols-2 gap-1.5 p-1.5">
+<div class="relative h-44 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Brushed cast iron kadai with brass handles resting on clean limestone kitchen counter, warm terracotta tones, soft natural morning sunlight, luxury minimalist editorial food photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBxA5TBcGh8z5dnrEuOKf2WLMW7g6Xvbw7ydhTlXBhtPVRB8trtT08XXsply2MqwQiYfS2is4ANs6-tUk17OjJo-1MFmBVO-rSYASW0OhDhU3dHKIG_Pxb3MvAw7SPdRFuvsXMuwlHLa-6aBJh3Zel91HwdjCjXBduatL6wHES-f_LhDHirHYZ2Rq-xvbavCyZLPQxnsg3LcnRFS6Ec7kLZDNnndgZXzgpGLkOD2nA80hqFfEdBPGr"/>
+<div class="absolute bottom-2 left-2 px-2 py-0.5 bg-surface/90 backdrop-blur-md rounded font-label-sm text-label-sm text-on-surface">Heavy Cast Iron</div>
+</div>
+<div class="relative h-44 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Traditional Indian Baati gas oven in polished stainless steel with glass viewing window, modern warm Indian kitchen setup, soft natural studio lighting, clean warm palette" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANWqlGfGFxf2Z_whSeyWjV44z2FgR0N5Inb5441aLyOiYtCF4z6sjdJ-wOukEtSb8yqF9zY7mcNEiLS7gR2oe1GzZGdK7qbaIVDzl8bP7PDh6UwUbhj8qt8PlayCDR2uaUH-mLeHnX5yD4uzD-l6UhcZ6dKJAXtJ0M9_HIFJjBO-W-hfgRMhsVxRTFbkgiQitaPsN5gp9_NNg4yg6NUpvPTHdDbtciYdGScMO2x2MHGt1yd-jsxojO"/>
+<div class="absolute bottom-2 left-2 px-2 py-0.5 bg-surface/90 backdrop-blur-md rounded font-label-sm text-label-sm text-on-surface">Baati Gas Oven</div>
+</div>
+<div class="relative h-36 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Set of clear modular airtight kitchen pantry containers filled with whole spices and lentils, wooden lids, minimalist warm pantry shelf styling, editorial product still" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACdwILpKceOk8vnxV9Mi5niPXC4E35sqrE3A9Rm4RrD8cr4vhKtpG9-u3x-cvOhdpPEp8yJiuqXWIJoY1cvmBv-9im2mn_zZjP6NU_T0I0wH3Qtf42DGD2rDkV8nrFQD1PneRYYqR2-K_s7iiwF7DMMZL6iLAFfbZtbCj6k3AIJYzInrGeNntg-tVmFZfvYHbL6ujEzVqnuma4J0nRrMEVK9rrVOaY8pZ6PRI31yu5vvHYHvD7tVCc"/>
+<div class="absolute bottom-2 left-2 px-2 py-0.5 bg-surface/90 backdrop-blur-md rounded font-label-sm text-label-sm text-on-surface">Airtight Jars</div>
+</div>
+<div class="relative h-36 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Tri-ply stainless steel roti tawa with ergonomic stay-cool wood handle, polished brushed metallic finish on warm linen cloth, premium editorial composition" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7VXGUxupw18fOQ9Nhp-KGd0tD9VhGbfYQh2nlGT5Mx0Wj2isaOTUh8UFm9qWCs3m29cusFQL6JqiVYeVmQBIBgY_9Iak7wZt4YSIl9GECxzGUaEWOd4gtXpxWNqs9xZfA811m7ddkPGio1yaJvCxe_mhf3D64bNrROw2xcKI6dp-6umT6nw6rnpC6EDMgbd4uPcCmCPa4te5_7J1AQEVPAuDRoetHNIuQZYMIHJnccC51IHyUKbmx"/>
+<div class="absolute bottom-2 left-2 px-2 py-0.5 bg-surface/90 backdrop-blur-md rounded font-label-sm text-label-sm text-on-surface">Tri-Ply Steel Tawa</div>
+</div>
+</div>
+<div class="p-3 bg-surface-container-high/80 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">verified</span>
+<span class="font-label-sm text-label-sm text-on-surface font-medium">Over 2,400+ Trusted Household Articles</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-bold">Udaipur</span>
+</div>
+</div>
+</div>
+</section>
+<!-- VALUE PROPOSITION TICKER STRIP -->
+<section class="w-full bg-surface-container-high py-3 px-gutter-mobile overflow-x-auto no-scrollbar">
+<div class="flex items-center gap-6 min-w-max">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">health_and_safety</span>
+<span class="font-label-sm text-label-sm text-on-surface">100% Food-Grade Virgin Plastic</span>
+</div>
+<span class="text-outline-variant">•</span>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">payments</span>
+<span class="font-label-sm text-label-sm text-on-surface">Cash On Delivery Available</span>
+</div>
+<span class="text-outline-variant">•</span>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">local_shipping</span>
+<span class="font-label-sm text-label-sm text-on-surface">Direct Doorstep Delivery</span>
+</div>
+<span class="text-outline-variant">•</span>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">sync_alt</span>
+<span class="font-label-sm text-label-sm text-on-surface">Easy In-Store &amp; Doorstep Exchange</span>
+</div>
+</div>
+</section>
+<!-- INTERACTIVE VISUAL NAVIGATOR: EXPLORE THE HOME -->
+<section class="flex flex-col py-space-xl px-gutter-mobile">
+<div class="flex items-end justify-between mb-space-sm">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider font-semibold">SPATIAL SELECTION</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Explore the Home</h2>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Tap room to filter</span>
+</div>
+<!-- Interactive Tabs -->
+<div class="flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar" id="roomPills">
+<button class="room-pill active px-4 py-2 rounded-full font-label-sm text-label-sm font-semibold transition-all bg-on-surface text-surface-container-lowest shadow-sm" onclick="switchRoom('kitchen', this)">Kitchen</button>
+<button class="room-pill px-4 py-2 rounded-full font-label-sm text-label-sm font-semibold transition-all bg-surface-container text-on-surface-variant" onclick="switchRoom('cooking', this)">Cooking</button>
+<button class="room-pill px-4 py-2 rounded-full font-label-sm text-label-sm font-semibold transition-all bg-surface-container text-on-surface-variant" onclick="switchRoom('storage', this)">Storage</button>
+<button class="room-pill px-4 py-2 rounded-full font-label-sm text-label-sm font-semibold transition-all bg-surface-container text-on-surface-variant" onclick="switchRoom('cleaning', this)">Cleaning</button>
+<button class="room-pill px-4 py-2 rounded-full font-label-sm text-label-sm font-semibold transition-all bg-surface-container text-on-surface-variant" onclick="switchRoom('utility', this)">Utility</button>
+<button class="room-pill px-4 py-2 rounded-full font-label-sm text-label-sm font-semibold transition-all bg-surface-container text-on-surface-variant" onclick="switchRoom('outdoor', this)">Outdoor</button>
+</div>
+<!-- Active Room Container -->
+<div class="mt-space-sm flex flex-col gap-3" id="roomShowcase">
+<!-- Dynamic Item Carousel / Card Set -->
+<div class="relative w-full h-56 rounded-2xl overflow-hidden bg-surface-container-low shadow-sm">
+<img class="w-full h-full object-cover transition-all duration-300" data-alt="Sun-drenched luxury modern Indian modular kitchen counter with warm brass vessels, spices in airtight glass jars, and handcrafted granite mortar pestle in soft afternoon glow" id="roomHeroImg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpf4R7Lr_7IuDCDEsgJh48TjskXHj0_DLCTbgD0k-C6dkrlVlTb40qU-KK6fL_EIA1oi8KGOpNRE1qilLamdGC8XPyCAJ1LfbEXXhyQP54hBcx-HTjOxX4jLKrsFdj85Go1nIbcW9KzvySQZTbaieYkTXsB6Fpst1ppT2HnZ3y23ntb6AGHGcv4gZ1bmk7NTlCLVy4gjZfS4UV_i_iuKeuC8HTV2OK5N6eD2VvzI9vSyHZwAR2qGi5"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/80 via-on-surface/20 to-transparent flex flex-col justify-end p-space-md text-surface-container-lowest">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary-fixed" id="roomHeroCategory">CENTRAL KITCHEN ESSENTIALS</span>
+<h3 class="font-title-lg text-title-lg text-white font-bold" id="roomHeroTitle">Everyday Prep &amp; Dining Corner</h3>
+<p class="font-body-sm text-body-sm text-surface-container-highest/90 mt-0.5 line-clamp-1" id="roomHeroDesc">From handi sets to silicone spatulas and brass parats.</p>
+</div>
+</div>
+<!-- Quick Room Feature Strip -->
+<div class="grid grid-cols-3 gap-2">
+<div class="bg-surface-container-lowest p-2.5 rounded-xl flex flex-col items-center text-center shadow-sm">
+<span class="material-symbols-outlined text-primary text-[22px] mb-1">skillet</span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold truncate w-full">Tri-Ply Kadai</span>
+<span class="font-price-sm text-price-sm text-primary mt-0.5">₹1,190</span>
+</div>
+<div class="bg-surface-container-lowest p-2.5 rounded-xl flex flex-col items-center text-center shadow-sm">
+<span class="material-symbols-outlined text-primary text-[22px] mb-1">bento</span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold truncate w-full">Spice Masala Box</span>
+<span class="font-price-sm text-price-sm text-primary mt-0.5">₹480</span>
+</div>
+<div class="bg-surface-container-lowest p-2.5 rounded-xl flex flex-col items-center text-center shadow-sm">
+<span class="material-symbols-outlined text-primary text-[22px] mb-1">countertops</span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold truncate w-full">Granite Chakla</span>
+<span class="font-price-sm text-price-sm text-primary mt-0.5">₹650</span>
+</div>
+</div>
+</div>
+</section>
+<!-- DISCOVER NAKODA: ASYMMETRIC CATEGORY GRID -->
+<section class="flex flex-col py-space-xl px-gutter-mobile bg-surface-container-low">
+<div class="flex flex-col mb-space-md">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider font-semibold">DEPARTMENT AISLES</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Discover Nakoda</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Engineered for endurance. Formed for warmth.</p>
+</div>
+<!-- Asymmetric Layout -->
+<div class="flex flex-col gap-3">
+<!-- Primary Feature Tile: Cookware -->
+<a class="group relative w-full h-64 rounded-2xl overflow-hidden shadow-sm bg-surface-container" data-path="categories" href="#">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Traditional heavy hammered brass lagan and stainless steel pressure cooker displayed on rustic dark oak kitchen background with warm subtle side light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjVR0vMAMiXQqZOZ7Zf84fKwSjVM7qq8-S-sXRxbSK74N-APTY2u7iA0XMyModY1PFJDDK1cLgzjQtRXCOQR6Dm8d92VczfNillcsbi3xUAaE_v4bFWLgn_aCkERbg2v47cJ31B9ea9oYIKQOmGiWrjuNH4n1MC4j0pWGf9e4B0CHwe6RK_smU-Rqc7hO-W0Ui_2o5nvM-CJvDB9ubKZsX5EIHtsRvPlnDfSIlmhSsYhuWoitJCPgh"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-on-surface/30 to-transparent p-space-md flex flex-col justify-end text-surface-container-lowest">
+<span class="font-label-sm text-label-sm text-secondary-container tracking-wider uppercase font-semibold">The Heart of the Kitchen</span>
+<h3 class="font-headline-md text-headline-md font-bold text-white">Cookware &amp; Utensils</h3>
+<p class="font-body-sm text-body-sm text-surface-variant line-clamp-1 mt-0.5">Tri-ply kadais, heavy patilas, milk boilers, and cast iron tawas.</p>
+<div class="flex items-center gap-1 mt-2 text-primary-fixed font-label-sm text-label-sm">
+<span>Explore 420+ Items</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</div>
+</div>
+</a>
+<!-- 2-Column Split: Appliances & Plastic Storage -->
+<div class="grid grid-cols-2 gap-3">
+<!-- Tile 2: Appliances -->
+<a class="group relative h-52 rounded-2xl overflow-hidden shadow-sm bg-surface-container flex flex-col justify-end p-3" data-path="categories" href="#">
+<img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-300" data-alt="Contemporary touch control digital air fryer alongside multi tier idli steamer on minimalist cream counter with warm illumination" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdpwoGa1-p5j3a2l65PGcRnHk8qlFxW4yrfVbYoFbgATVE5ta9P3MvE-IRUpQlxlRbaFnffzEexWFTgXRHkPwHiZpEcd8UAQX-VM54iySXxW_ccB9_shez1EXRN3bzYM7mZdjZvUD5E7MoJloq7SSi-TkoFXq_sX64g3fphvD0HufWOVMVVGgvYEQlUYqasnEPSwRdGElTIVjV1Vsl5mOT3YH_ZWcHf7B4jB3MSxweiSFpQsyfFLVr"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/85 via-on-surface/30 to-transparent"></div>
+<div class="relative z-10 flex flex-col">
+<span class="font-label-sm text-[10px] text-tertiary-fixed font-semibold uppercase">Power &amp; Steam</span>
+<h4 class="font-title-md text-title-md text-white font-bold leading-tight">Kitchen Appliances</h4>
+<span class="font-body-sm text-[11px] text-surface-container-highest mt-1">Airfryers, Baati &amp; Idli</span>
+</div>
+</a>
+<!-- Tile 3: Plastic & Smart Storage -->
+<a class="group relative h-52 rounded-2xl overflow-hidden shadow-sm bg-surface-container flex flex-col justify-end p-3" data-path="categories" href="#">
+<img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-300" data-alt="Matte pastel storage crates and stacked translucent airtight pantry organizers with dry grains in warm organized domestic pantry" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMHSzPlJu_XMmzhSJsxqNgXtPimJp9AyTTmipGxObmNcKNR0RH1S4ZCgeJTf4-5w_RyhM8iCaDzPmkc5Gv-CYxFsVl9yd1nIMV_KDTxe87erM88XZ0nlbaoaebZit5xakoEd1HEcsFGa7Srk6H3dvCZmAGf9dp3LD6aY3sBoClH0y_D2uzRE5Jwts_f0qLyrsUTMfftxr_-xtg0H3HZ7rF0ghZBXu_wpyBLKyZnCeZWwNGOOJn1JzS"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/85 via-on-surface/30 to-transparent"></div>
+<div class="relative z-10 flex flex-col">
+<span class="font-label-sm text-[10px] text-secondary-fixed font-semibold uppercase">BPA-Free Virgin</span>
+<h4 class="font-title-md text-title-md text-white font-bold leading-tight">Smart Plastic Storage</h4>
+<span class="font-body-sm text-[11px] text-surface-container-highest mt-1">Crates, Jars &amp; Racks</span>
+</div>
+</a>
+</div>
+<!-- 2-Column Split: Cleaning & Utility -->
+<div class="grid grid-cols-2 gap-3">
+<!-- Tile 4: Cleaning & Hygiene -->
+<a class="group relative h-48 rounded-2xl overflow-hidden shadow-sm bg-surface-container flex flex-col justify-end p-3" data-path="categories" href="#">
+<img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-300" data-alt="Microfiber floor spin mop set, matte pedal dustbins, and modern bathroom wiper neatly composed in bright airy domestic laundry space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsRw8w4nqxtyT96ciTbuX38H96el86uVwmYmCI7VqYlX5RUmkrfAAVl9VzoMHnHR-rbV3GV0sXrIOFw4QIZG7Ly7kS0RKI7FewkSVv3ZGxAGaSkEW367dLmuA98X02lNasEioDE7ktoWPCbAD8_NA2zGsiJZBgURW_T6tI8a6aga7M5ZNjpXI_TsPcUmV2Rrfu-AGWpLnc1TZTQeeU5dZdTYShPrJH9NqDEjFnH9M5oTXXkMqlRo8u"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/85 via-on-surface/30 to-transparent"></div>
+<div class="relative z-10 flex flex-col">
+<span class="font-label-sm text-[10px] text-surface-variant font-semibold uppercase">Pristine Spaces</span>
+<h4 class="font-title-md text-title-md text-white font-bold leading-tight">Cleaning Essentials</h4>
+<span class="font-body-sm text-[11px] text-surface-container-highest mt-0.5">Mops, Wipers &amp; Bins</span>
+</div>
+</a>
+<!-- Tile 5: Utility & Monsoon -->
+<a class="group relative h-48 rounded-2xl overflow-hidden shadow-sm bg-surface-container flex flex-col justify-end p-3" data-path="categories" href="#">
+<img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-300" data-alt="Heavy duty double layer large monsoon umbrellas standing beside laundry hampers and utility bathroom buckets in modern warm Indian home" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUQCJfRRUbcjzd3HhaWMHI0bkQzWP5dVxtZQZCIP2zJZ0hnnwhuhgVpTsl8ACGh5MwP_MzfJjPFohnshx03QGQQPuX4_-H6DCuI3PTfNVWG3O_xg8uQvGLIEC719PpnxlCF0ExpGKXpAk8b_hcEGGF0vEfSXClfMqDhYCvZodfLWTi90BwsThwauhQX28qCoXVidyBpR93JHwiCh5WhQSQY5NUM_PuhkJuTEil1rKyxNNqtznSYMo7"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/85 via-on-surface/30 to-transparent"></div>
+<div class="relative z-10 flex flex-col">
+<span class="font-label-sm text-[10px] text-secondary-fixed font-semibold uppercase">All-Weather</span>
+<h4 class="font-title-md text-title-md text-white font-bold leading-tight">Utility &amp; Monsoon</h4>
+<span class="font-body-sm text-[11px] text-surface-container-highest mt-0.5">Heavy Umbrellas &amp; Mats</span>
+</div>
+</a>
+</div>
+</div>
+</section>
+<!-- APPLIANCE SPOTLIGHT: SPECIALTY RAJASTHANI & INDIAN COOKING -->
+<section class="flex flex-col py-space-xl px-gutter-mobile bg-surface">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider font-semibold">REGIONAL MASTERY</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Bring More to Your Kitchen</h2>
+</div>
+<a class="font-label-sm text-label-sm text-primary font-bold" data-path="categories" href="#">View All</a>
+</div>
+<!-- Carousel Cards (Single-column card carousel stack) -->
+<div class="flex flex-col gap-4">
+<!-- Card 1: Baati Gas Oven -->
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm p-space-sm flex flex-col gap-3">
+<div class="relative w-full h-48 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Traditional heavy duty Baati gas cooker tandoor oven on kitchen platform with hot golden bati inside, soft glowing embers, authentic Rajasthani cooking editorial" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBGdJzYzEmS9C8UHrw5TisVatuQX6YuQx4IB4OXGP33x4u-aHzKMvrTB4VvVSMJeVzG5C4rQvAJ2smepHxsNrQCOWbobvcIKo20yIm_1tE_2gafRsEduWaa5ojKwKVMpuXaMj6BqMbJ99rOr1cgx8EUk4pfpI3gbjcj-nHcUXLBbdDSwNxI4qcmBGrGoPIcMR8QnZdgC6bgCyQJTXyU4qKoDhXjp8OJgasDRRov0CBrEM61XE5mG31"/>
+<div class="absolute top-2 left-2 px-2.5 py-1 bg-tertiary text-on-tertiary rounded-full font-label-sm text-label-sm font-semibold">
+            Store Bestseller
+          </div>
+<div class="absolute bottom-2 right-2 px-2 py-0.5 bg-surface/95 backdrop-blur-md rounded text-on-surface font-label-sm text-label-sm font-medium">
+            100% In Stock
+          </div>
+</div>
+<div class="flex flex-col">
+<div class="flex items-baseline justify-between">
+<h3 class="font-title-md text-title-md text-on-surface font-bold">Heavy-Duty Baati Gas Tandoor Oven</h3>
+<span class="font-price-lg text-price-lg text-primary">₹1,450</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Extra-thick aluminum dome body, heat-resistant toughened glass lid, perfect for authentic Dal-Baati, Tandoori Roti &amp; Naan.
+          </p>
+<div class="flex items-center gap-3 mt-2 font-label-sm text-label-sm text-on-surface-variant">
+<span class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[16px]">verified</span> 2-Year Warranty
+            </span>
+<span>•</span>
+<span class="text-[#25D366] font-semibold">COD Available</span>
+</div>
+</div>
+<div class="flex items-center gap-2 pt-1">
+<button class="flex-1 h-11 bg-primary text-on-primary rounded-xl font-label-md text-label-md hover:bg-primary-container transition-all flex items-center justify-center gap-2" onclick="addToCartMock('Heavy-Duty Baati Gas Oven', 1450)">
+<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+<span>ADD TO CART</span>
+</button>
+<a aria-label="Ask on WhatsApp" class="h-11 px-3.5 bg-surface-container text-on-surface rounded-xl flex items-center justify-center hover:bg-surface-container-high transition-all" href="https://wa.me/919829741206?text=Hi%20Nakoda,%20I%20am%20interested%20in%20the%20Heavy-Duty%20Baati%20Gas%20Oven%20(₹1450)" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[#25D366] text-[20px]">chat</span>
+</a>
+</div>
+</div>
+<!-- Card 2: Stainless Multi-Tier Idli Steamer -->
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm p-space-sm flex flex-col gap-3">
+<div class="relative w-full h-48 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="High quality stainless steel 4-tier idli cooker steamer on warm kitchen counter with hot fresh steaming idlis, clean food photography, natural bright light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBg4pn7diI5i0bNRiZn8Na9fH3Dt6Yh8Kzta3zUNKwLRbKYBIq18rqbpSbLIcV0MIXKtGUkFe2D5PkqPmBBB_F4YhyZFG3YojdBvmDvRlU69R1OFdlo0ZV4-5VTvPSoi_bEb_3B9n-K2UNmnONZlX_kkytjy6sERjdjNBnR9tfP3i5gZjKqysKbSH3VP6ZPOpcNDXzkkwf3V80uAzE8vYRnKdDXHfN9MkmySfVZXRynwHzKGtisk_5r"/>
+<div class="absolute top-2 left-2 px-2.5 py-1 bg-secondary text-on-secondary rounded-full font-label-sm text-label-sm font-semibold">
+            Pure Food Grade 304
+          </div>
+<div class="absolute bottom-2 right-2 px-2 py-0.5 bg-surface/95 backdrop-blur-md rounded text-on-surface font-label-sm text-label-sm font-medium">
+            16 Idlis Per Batch
+          </div>
+</div>
+<div class="flex flex-col">
+<div class="flex items-baseline justify-between">
+<h3 class="font-title-md text-title-md text-on-surface font-bold">Traditional 4-Tier Idli Cooker</h3>
+<span class="font-price-lg text-price-lg text-primary">₹980</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Induction &amp; Gas compatible, rust-free heavy gauge stainless steel with whistle vent indicator.
+          </p>
+<div class="flex items-center gap-3 mt-2 font-label-sm text-label-sm text-on-surface-variant">
+<span class="flex items-center gap-1 text-primary font-semibold">
+<span class="material-symbols-outlined text-[16px]">local_fire_department</span> Induction Safe
+            </span>
+<span>•</span>
+<span class="text-[#25D366] font-semibold">COD Available</span>
+</div>
+</div>
+<div class="flex items-center gap-2 pt-1">
+<button class="flex-1 h-11 bg-primary text-on-primary rounded-xl font-label-md text-label-md hover:bg-primary-container transition-all flex items-center justify-center gap-2" onclick="addToCartMock('Traditional 4-Tier Idli Cooker', 980)">
+<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+<span>ADD TO CART</span>
+</button>
+<a aria-label="Ask on WhatsApp" class="h-11 px-3.5 bg-surface-container text-on-surface rounded-xl flex items-center justify-center hover:bg-surface-container-high transition-all" href="https://wa.me/919829741206?text=Hi%20Nakoda,%20I%20am%20interested%20in%20the%204-Tier%20Idli%20Cooker%20(₹980)" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[#25D366] text-[20px]">chat</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- 'SMALL THINGS. BIG DIFFERENCE' DAILY DOMESTIC ESSENTIALS -->
+<section class="flex flex-col py-space-xl px-gutter-mobile bg-surface-container">
+<div class="flex flex-col mb-space-md">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider font-semibold">DAILY RESOLUTIONS</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Small Things. Big Difference.</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">The quiet essentials that make an Indian home run effortlessly.</p>
+</div>
+<!-- Grid of micro-cards with soft elevation -->
+<div class="grid grid-cols-2 gap-2.5">
+<!-- Item 1 -->
+<div class="bg-surface-container-lowest p-3 rounded-xl flex flex-col justify-between shadow-sm">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed mb-2">
+<span class="material-symbols-outlined text-[20px]">compress</span>
+</div>
+<div>
+<h4 class="font-title-md text-[14px] text-on-surface font-semibold">Leakproof Spice Jars</h4>
+<p class="font-body-sm text-[11px] text-on-surface-variant leading-tight mt-0.5">Silicon vacuum seal for humid monsoon protection.</p>
+</div>
+<span class="font-price-sm text-price-sm text-primary mt-2">From ₹85</span>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-lowest p-3 rounded-xl flex flex-col justify-between shadow-sm">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed mb-2">
+<span class="material-symbols-outlined text-[20px]">panorama_fish_eye</span>
+</div>
+<div>
+<h4 class="font-title-md text-[14px] text-on-surface font-semibold">Roti Belan Chakla</h4>
+<p class="font-body-sm text-[11px] text-on-surface-variant leading-tight mt-0.5">Heavy green marble chakla with balanced sheesham wood belan.</p>
+</div>
+<span class="font-price-sm text-price-sm text-primary mt-2">From ₹340</span>
+</div>
+<!-- Item 3 -->
+<div class="bg-surface-container-lowest p-3 rounded-xl flex flex-col justify-between shadow-sm">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed mb-2">
+<span class="material-symbols-outlined text-[20px]">view_agenda</span>
+</div>
+<div>
+<h4 class="font-title-md text-[14px] text-on-surface font-semibold">Plastic Drawer Units</h4>
+<p class="font-body-sm text-[11px] text-on-surface-variant leading-tight mt-0.5">3 &amp; 4-tier modular multi-utility organizers.</p>
+</div>
+<span class="font-price-sm text-price-sm text-primary mt-2">From ₹790</span>
+</div>
+<!-- Item 4 -->
+<div class="bg-surface-container-lowest p-3 rounded-xl flex flex-col justify-between shadow-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary mb-2">
+<span class="material-symbols-outlined text-[20px]">cleaning_services</span>
+</div>
+<div>
+<h4 class="font-title-md text-[14px] text-on-surface font-semibold">Floor Microfiber Mops</h4>
+<p class="font-body-sm text-[11px] text-on-surface-variant leading-tight mt-0.5">Heavy spinner mechanism with dual water extraction.</p>
+</div>
+<span class="font-price-sm text-price-sm text-primary mt-2">From ₹599</span>
+</div>
+</div>
+</section>
+<!-- NAKODA PICKS & NEW ARRIVALS (2-COLUMN PRODUCT GRID) -->
+<section class="flex flex-col py-space-xl px-gutter-mobile bg-surface">
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider font-semibold">CURATED THIS WEEK</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Store Picks &amp; Arrivals</h2>
+</div>
+<a class="font-label-sm text-label-sm text-primary font-bold flex items-center" data-path="product-catalog" href="#">
+<span>Shop All</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</a>
+</div>
+<!-- 2-Column Product Grid -->
+<div class="grid grid-cols-2 gap-3">
+<!-- Product 1 -->
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm flex flex-col">
+<div class="relative w-full h-40 bg-surface-container-low overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Tri-ply stainless steel 2.5L kadai with polished interior and brushed exterior, sitting on a warm beige tile countertop with fresh herbs" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6O0CcfQGtDHA9Q2RKWgamPJ0uuCR9P0Yxe07yN_gsU-xkuxKAwK741tveKFNnK7_m_3keX_rnoF7PxnTF25-GVN5YVLzE3XK-4fdMkT20KSa4O-OEna0s_esrJGBRwCwlNMJ2rJiQchSmkHkYDkwm_0KrnxxCGhMNM467kSO1GBOKxZGpfI9dUo5I9CH1_B9BPXaCKAoLNCy7YPy3z4_yrSWoKTnoXdXE30Q3tJJR-tCvElo_DENb"/>
+<span class="absolute top-2 left-2 px-2 py-0.5 bg-primary text-on-primary rounded font-label-sm text-[10px] font-bold uppercase tracking-wider">STORE PICK</span>
+</div>
+<div class="p-3 flex flex-col flex-1 justify-between gap-2">
+<div class="flex flex-col">
+<div class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-[11px] font-bold">4.9</span>
+<span class="text-on-surface-variant text-[10px]">(84)</span>
+</div>
+<h4 class="font-title-md text-[13px] leading-tight text-on-surface font-semibold mt-1 line-clamp-2">Handcrafted Tri-Ply Stainless Kadai 2.5L</h4>
+<div class="flex items-baseline gap-1.5 mt-1.5">
+<span class="font-price-sm text-price-sm text-primary">₹899</span>
+<span class="font-body-sm text-[11px] text-on-surface-variant line-through">₹1,299</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 pt-1">
+<button class="flex-1 h-9 bg-primary text-on-primary rounded-lg font-label-sm text-[11px] font-bold flex items-center justify-center gap-1" onclick="addToCartMock('Handcrafted Tri-Ply Kadai', 899)">
+<span>Quick Add</span>
+<span class="material-symbols-outlined text-[14px]">add</span>
+</button>
+<a aria-label="WhatsApp Product Inquiry" class="w-9 h-9 bg-surface-container rounded-lg flex items-center justify-center text-on-surface" href="https://wa.me/919829741206?text=Hi%20Nakoda,%20tell%20me%20about%20Handcrafted%20Tri-Ply%20Kadai" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[#25D366] text-[18px]">chat</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm flex flex-col">
+<div class="relative w-full h-40 bg-surface-container-low overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Traditional 4-tier idli steamer cooker open with fresh idlis inside, warm terracotta kitchen aesthetic, clean editorial composition" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtogUxeyzjvYetcf3M0FrbCdJpO61xdvi2kybdqRk2kFKzyLVlc867HddCrTCJulgtm2x82SV3uujpiV1tZ-sn2kAIoATdl3IpjdyQJOiEcUdW_II5CtfKPb_V-CUxP5LgbEJdyYMHnLFhVFPKJLRwkj1Sy6I6dAV7ENbVl2B9Tc1SOhaUUe-8zwpNRHLVK0UKQAKiwOiqOCdBMcFT3lXaQS3KSUuJzlSdYWebzzJ6Anu7GiKmN5g8"/>
+<span class="absolute top-2 left-2 px-2 py-0.5 bg-tertiary-container text-on-tertiary-container rounded font-label-sm text-[10px] font-bold uppercase tracking-wider">NEW</span>
+</div>
+<div class="p-3 flex flex-col flex-1 justify-between gap-2">
+<div class="flex flex-col">
+<div class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-[11px] font-bold">4.8</span>
+<span class="text-on-surface-variant text-[10px]">(42)</span>
+</div>
+<h4 class="font-title-md text-[13px] leading-tight text-on-surface font-semibold mt-1 line-clamp-2">Traditional 4-Tier Idli Cooker Set</h4>
+<div class="flex items-baseline gap-1.5 mt-1.5">
+<span class="font-price-sm text-price-sm text-primary">₹980</span>
+<span class="font-body-sm text-[11px] text-on-surface-variant line-through">₹1,450</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 pt-1">
+<button class="flex-1 h-9 bg-primary text-on-primary rounded-lg font-label-sm text-[11px] font-bold flex items-center justify-center gap-1" onclick="addToCartMock('Traditional 4-Tier Idli Cooker', 980)">
+<span>Quick Add</span>
+<span class="material-symbols-outlined text-[14px]">add</span>
+</button>
+<a aria-label="WhatsApp Product Inquiry" class="w-9 h-9 bg-surface-container rounded-lg flex items-center justify-center text-on-surface" href="https://wa.me/919829741206?text=Hi%20Nakoda,%20tell%20me%20about%20Traditional%20Idli%20Cooker" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[#25D366] text-[18px]">chat</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm flex flex-col">
+<div class="relative w-full h-40 bg-surface-container-low overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Modular 6-piece dry fruit airtight box with translucent lids, partitioned tray, warm golden almonds and pistachios inside, luxury domestic tableware presentation" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCb0gjdpNi8peaOylUKWUsuI2qc8gHAyVccWf8HJL_S4da-1Jgy7GH07L6YqZvGlBDtud_LN7UkqBfBsjptxLT4nhAhzTwgb-aOg1vxhD3qy7_JDmRC_NzOzNUlGG46mUKfkf5_MSgAk7izPSd2ciCJBiNfqEUjs7LVh2xV6NK796Jjez9REapsdZxvK0a1qhRlANG9RMCyM3uy26BWVJtxNrJR4By5Mfk370Y1kX0H8IPE0gsWtZt3"/>
+<span class="absolute top-2 left-2 px-2 py-0.5 bg-secondary text-on-secondary rounded font-label-sm text-[10px] font-bold uppercase tracking-wider">POPULAR</span>
+</div>
+<div class="p-3 flex flex-col flex-1 justify-between gap-2">
+<div class="flex flex-col">
+<div class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-[11px] font-bold">4.7</span>
+<span class="text-on-surface-variant text-[10px]">(119)</span>
+</div>
+<h4 class="font-title-md text-[13px] leading-tight text-on-surface font-semibold mt-1 line-clamp-2">Modular 6-Piece Dry Fruit Organizer</h4>
+<div class="flex items-baseline gap-1.5 mt-1.5">
+<span class="font-price-sm text-price-sm text-primary">₹399</span>
+<span class="font-body-sm text-[11px] text-on-surface-variant line-through">₹599</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 pt-1">
+<button class="flex-1 h-9 bg-primary text-on-primary rounded-lg font-label-sm text-[11px] font-bold flex items-center justify-center gap-1" onclick="addToCartMock('Modular Dry Fruit Box', 399)">
+<span>Quick Add</span>
+<span class="material-symbols-outlined text-[14px]">add</span>
+</button>
+<a aria-label="WhatsApp Product Inquiry" class="w-9 h-9 bg-surface-container rounded-lg flex items-center justify-center text-on-surface" href="https://wa.me/919829741206?text=Hi%20Nakoda,%20tell%20me%20about%20Modular%20Dry%20Fruit%20Box" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[#25D366] text-[18px]">chat</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Product 4 -->
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm flex flex-col">
+<div class="relative w-full h-40 bg-surface-container-low overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Heavy duty double layer monsoon storm umbrella with sturdy ribbed frame, water-repellent navy fabric, modern studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2dAJD5a_bpQQWGbCYUUhMQXplfwKmU83tMFGq7rlkTJVBCaG2LOHtyNwAq4NkvjayXZBpF1TmKBkea69iTsBjgBM25fJASOPBKMejpiI-5oaQedo2DmKVEZNe8xx1rk_iW_zTMkloKbW5LA-ORVVvT8NaVS-OL_QIyZObspiVwqZzila885RmeXh0mqsDzOFiZNZ5xIJ20_BtCH6qAyrlrX9o1KK4S0vxE23nEm43x7Kp84GBAzv9"/>
+<span class="absolute top-2 left-2 px-2 py-0.5 bg-primary-container text-on-primary-container rounded font-label-sm text-[10px] font-bold uppercase tracking-wider">SEASONAL</span>
+</div>
+<div class="p-3 flex flex-col flex-1 justify-between gap-2">
+<div class="flex flex-col">
+<div class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-[11px] font-bold">4.9</span>
+<span class="text-on-surface-variant text-[10px]">(67)</span>
+</div>
+<h4 class="font-title-md text-[13px] leading-tight text-on-surface font-semibold mt-1 line-clamp-2">Heavy Duty Double-Layer Umbrella</h4>
+<div class="flex items-baseline gap-1.5 mt-1.5">
+<span class="font-price-sm text-price-sm text-primary">₹450</span>
+<span class="font-body-sm text-[11px] text-on-surface-variant line-through">₹750</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 pt-1">
+<button class="flex-1 h-9 bg-primary text-on-primary rounded-lg font-label-sm text-[11px] font-bold flex items-center justify-center gap-1" onclick="addToCartMock('Heavy Duty Double-Layer Umbrella', 450)">
+<span>Quick Add</span>
+<span class="material-symbols-outlined text-[14px]">add</span>
+</button>
+<a aria-label="WhatsApp Product Inquiry" class="w-9 h-9 bg-surface-container rounded-lg flex items-center justify-center text-on-surface" href="https://wa.me/919829741206?text=Hi%20Nakoda,%20tell%20me%20about%20Monsoon%20Umbrella" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[#25D366] text-[18px]">chat</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- STORE STORY & HUMAN WARMTH -->
+<section class="flex flex-col py-space-xl px-gutter-mobile bg-surface-container-high">
+<div class="flex flex-col gap-3">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider font-semibold">FROM OUR FOUNDER</span>
+</div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Built Around Everyday Life</h2>
+<!-- Story Quote Card -->
+<div class="bg-surface-container-lowest p-space-md rounded-2xl shadow-sm flex flex-col gap-3">
+<p class="font-body-md text-body-md text-on-surface italic leading-relaxed">
+          “We opened Nakoda with one clear conviction: good kitchenware shouldn't be a privilege, and plastic shouldn't mean poor quality. Every single item on our shelves — from a heavy stainless steel kadai to a leak-proof water bottle — is tested for real Indian domestic use. We know what Rajasthani kitchens cook, how families store, and what endures year after year.”
+        </p>
+<div class="flex items-center gap-3 pt-2 border-t-0">
+<div class="w-11 h-11 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed font-bold font-title-md">
+            SD
+          </div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface font-semibold">Shikhar Dharmawat</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Nakoda Kitchen Wares &amp; Plastic Items</span>
+</div>
+</div>
+</div>
+<!-- Retail Store Address Card -->
+<div class="bg-surface-container-lowest p-space-md rounded-2xl shadow-sm flex flex-col gap-3 mt-1">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[24px] mt-0.5">storefront</span>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface font-bold">Visit Our Udaipur Store</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Eklind Pura Road, RIICO Road, Udaipur, Rajasthan</span>
+<span class="font-label-sm text-label-sm text-primary font-semibold mt-1">Open 10:00 AM — 10:00 PM Every Single Day</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 pt-2">
+<a class="h-10 bg-surface-container rounded-xl flex items-center justify-center gap-1.5 text-on-surface font-label-sm text-label-sm hover:bg-surface-container-high transition-colors" href="tel:9829741755">
+<span class="material-symbols-outlined text-[18px] text-primary">call</span>
+<span>9829741755</span>
+</a>
+<a class="h-10 bg-surface-container rounded-xl flex items-center justify-center gap-1.5 text-on-surface font-label-sm text-label-sm hover:bg-surface-container-high transition-colors" href="https://wa.me/919829741206" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[#25D366] text-[18px]">chat</span>
+<span>9829741206</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- QUICK FLOATING TOAST CONTAINER FOR CART DELIGHT -->
+<div class="fixed bottom-24 left-4 right-4 z-50 transform translate-y-32 opacity-0 transition-all duration-300 pointer-events-none" id="cartToast">
+<div class="bg-inverse-surface text-inverse-on-surface py-3 px-4 rounded-xl shadow-xl flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#25D366] text-[20px]">check_circle</span>
+<span class="font-label-md text-label-md" id="cartToastMsg">Added to Cart</span>
+</div>
+<a class="font-label-md text-label-md text-secondary-fixed font-bold pointer-events-auto" data-path="shopping-cart" href="#">VIEW CART</a>
+</div>
+</div>
+</div>
+<script>
+  // Dynamic visual navigator room switcher
+  const roomData = {
+    kitchen: {
+      category: "CENTRAL KITCHEN ESSENTIALS",
+      title: "Everyday Prep & Dining Corner",
+      desc: "From handi sets to silicone spatulas and brass parats.",
+      image: "placeholder",
+      alt: "Sun-drenched luxury modern Indian modular kitchen counter with warm brass vessels, spices in airtight glass jars, and handcrafted granite mortar pestle in soft afternoon glow"
+    },
+    cooking: {
+      category: "FLAME & INDUCTION CRAFT",
+      title: "Heavy Cookware & Specialty Pans",
+      desc: "Tri-ply kadais, heavy non-stick tawa, and pressure cookers.",
+      image: "placeholder",
+      alt: "Polished heavy stainless steel kadai and cast iron skillet resting over warm induction cooktop with natural herbs in luxury Indian home"
+    },
+    storage: {
+      category: "PANTRY & WARDROBE PRECISION",
+      title: "Virgin Plastic Jars & Stacking Racks",
+      desc: "Airtight modular canisters, vegetable stands & drawer units.",
+      image: "placeholder",
+      alt: "Pantry shelving systematically lined with clean translucent airtight canisters, baskets with grains, warm minimalist domestic pantry"
+    },
+    cleaning: {
+      category: "HYGIENE & FLOORCARE",
+      title: "Mops, Wiper Squeegees & Waste Bins",
+      desc: "Heavy 360-degree microfiber spin mops and stainless pedal bins.",
+      image: "placeholder",
+      alt: "Modern domestic cleaning essentials arranged on warm polished stone floor with stainless steel pedal bin and dual bucket spin mop"
+    },
+    utility: {
+      category: "EVERYDAY CONVENIENCES",
+      title: "Buckets, Step Stools & Hangers",
+      desc: "Crack-resistant virgin plastic bathroom sets and sturdy clothes racks.",
+      image: "placeholder",
+      alt: "Pastel premium bathroom utility set including molded bucket, mug, and ergonomic footstool arranged against sunlit warm textured wall"
+    },
+    outdoor: {
+      category: "ALL-WEATHER UTILITY",
+      title: "Heavy Umbrellas & Door Mats",
+      desc: "Wind-proof monsoon umbrellas and coir entrance mats.",
+      image: "placeholder",
+      alt: "Architectural entryway with large double-ribbed monsoon umbrellas standing in woven stand near textured earth-tone welcome mat"
+    }
+  };
+
+  function switchRoom(roomKey, el) {
+    const pills = document.querySelectorAll('.room-pill');
+    pills.forEach(p => {
+      p.classList.remove('bg-on-surface', 'text-surface-container-lowest', 'active');
+      p.classList.add('bg-surface-container', 'text-on-surface-variant');
+    });
+
+    el.classList.remove('bg-surface-container', 'text-on-surface-variant');
+    el.classList.add('bg-on-surface', 'text-surface-container-lowest', 'active');
+
+    const data = roomData[roomKey];
+    if (data) {
+      const hero = document.getElementById('roomHeroImg');
+      const cat = document.getElementById('roomHeroCategory');
+      const title = document.getElementById('roomHeroTitle');
+      const desc = document.getElementById('roomHeroDesc');
+
+      cat.textContent = data.category;
+      title.textContent = data.title;
+      desc.textContent = data.desc;
+      hero.setAttribute('data-alt', data.alt);
+      hero.src = data.image;
+    }
+  }
+
+  // Micro-interaction: Quick Add Toast notification
+  function addToCartMock(itemName, price) {
+    const toast = document.getElementById('cartToast');
+    const msg = document.getElementById('cartToastMsg');
+    
+    msg.textContent = itemName + ' added • ₹' + price;
+    toast.classList.remove('translate-y-32', 'opacity-0');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    // Update global badge indicator in App Shell if available
+    const cartBadge = document.querySelector('a[data-path="shopping-cart"] span:nth-child(2)');
+    if (cartBadge) {
+      let currentVal = parseInt(cartBadge.textContent) || 0;
+      cartBadge.textContent = currentVal + 1;
+      cartBadge.classList.add('scale-125');
+      setTimeout(() => cartBadge.classList.remove('scale-125'), 200);
+    }
+
+    setTimeout(() => {
+      toast.classList.add('translate-y-32', 'opacity-0');
+      toast.classList.remove('translate-y-0', 'opacity-100');
+    }, 2800);
+  }
+</script></main><aside class="fixed bottom-24 right-gutter-mobile z-40"><a class="flex items-center gap-space-xs bg-surface-container-lowest text-on-surface px-space-md py-space-xs rounded-full shadow-[0_4px_20px_rgba(44,42,41,0.12)] border border-outline-variant/40 hover:bg-surface-container-low transition-all active:scale-95" href="https://wa.me/919829741206?text=Hi%20Nakoda%20Kitchenware,%20I%20would%20like%20to%20place%20an%20order" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[#25D366] text-[22px]">chat</span><div class="flex flex-col items-start text-left"><span class="font-label-sm text-label-sm leading-tight text-primary font-bold">Chat with Nakoda</span><span class="font-body-sm text-[10px] leading-none text-on-surface-variant">9829741206</span></div></a></aside><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_-2px_12px_rgba(0,0,0,0.05)]" data-active-classes="text-primary font-bold"><div class="flex justify-around items-center h-16 px-space-xs"><a aria-current="page" class="flex flex-col items-center justify-center gap-0.5 w-16 h-14 transition-colors text-primary font-bold" data-path="home-storefront" href="#"><span class="material-symbols-outlined text-[22px]">home</span><span class="font-label-sm text-label-sm leading-none">Home</span></a><a class="flex flex-col items-center justify-center gap-0.5 w-16 h-14 text-on-surface-variant hover:text-primary transition-colors" data-path="product-catalog" href="#"><span class="material-symbols-outlined text-[22px]">storefront</span><span class="font-label-sm text-label-sm leading-none">Shop</span></a><a class="flex flex-col items-center justify-center gap-0.5 w-16 h-14 text-on-surface-variant hover:text-primary transition-colors" data-path="categories" href="#"><span class="material-symbols-outlined text-[22px]">grid_view</span><span class="font-label-sm text-label-sm leading-none">Categories</span></a><a class="flex flex-col items-center justify-center gap-0.5 w-16 h-14 text-on-surface-variant hover:text-primary transition-colors" data-path="wishlist" href="#"><span class="material-symbols-outlined text-[22px]">favorite</span><span class="font-label-sm text-label-sm leading-none">Wishlist</span></a><a class="flex flex-col items-center justify-center gap-0.5 w-16 h-14 text-on-surface-variant hover:text-primary transition-colors" data-path="shopping-cart" href="#"><span class="material-symbols-outlined text-[22px]">shopping_bag</span><span class="font-label-sm text-label-sm leading-none">Cart</span></a></div></nav></body></html>

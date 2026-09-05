@@ -1,0 +1,28 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^@'\nconst fs=require\\('fs'\\),vm=require\\('vm'\\);let h=fs\\.readFileSync\\('account\\.html','utf8'\\),s=h\\.slice\\(h\\.indexOf\\('<script>'\\)\\+8,h\\.indexOf\\('</script>'\\)\\);\nconst l=s\\.split\\('\\\\n'\\)\\[22\\];\nfor\\(const a of \\[\"if\\(path==='/api/account/notifications'\\)\", \"if\\(path==='/account/help'\\)\", \"if\\(path==='/account/transactions'\\)\", \"if\\(path==='/account/recently-viewed'\\)\"\\]\\)\\{let i=l\\.indexOf\\(a\\);let x=s\\.replace\\(l,l\\.slice\\(0,i\\)\\+'dashboard\\(\\)\\}'\\);try\\{new vm\\.Script\\(x\\);console\\.log\\(a,'before ok'\\)\\}catch\\(e\\)\\{console\\.log\\(a,'before fails'\\)\\} \\}\n'@ \\| node$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^@'\nconst fs=require\\('fs'\\);let h=fs\\.readFileSync\\('account\\.html','utf8'\\),s=h\\.slice\\(h\\.indexOf\\('<script>'\\)\\+8,h\\.indexOf\\('</script>'\\)\\);let l=s\\.split\\('\\\\n'\\)\\[22\\]; console\\.log\\(l\\.slice\\(2150\\)\\);\n'@ \\| node$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^@'\nconst fs=require\\('fs'\\),vm=require\\('vm'\\);let h=fs\\.readFileSync\\('account\\.html','utf8'\\),s=h\\.slice\\(h\\.indexOf\\('<script>'\\)\\+8,h\\.indexOf\\('</script>'\\)\\);let l=s\\.split\\('\\\\n'\\)\\[22\\], i=l\\.indexOf\\(\"if\\(path==='/account/help'\\)\"\\);let pre=s\\.replace\\(l,l\\.slice\\(0,i\\)\\+'dashboard\\(\\)\\}'\\);let expr=l\\.slice\\(i\\);for\\(let j=0;j<expr\\.length;j\\+=50\\)\\{let x=pre\\+';'\\+expr\\.slice\\(0,j\\)\\+'dashboard\\(\\)\\}';try\\{new vm\\.Script\\(x\\);console\\.log\\('ok',j\\)\\}catch\\(e\\)\\{\\}\\};\n'@ \\| node$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^& 'f:/buisness/\\.venv/Scripts/python\\.exe' -c \"import sys; sys\\.path\\.insert\\(0,'backend'\\); import app; print\\('routes', len\\(app\\.app\\.url_map\\._rules\\)\\); print\\(\\[r\\.rule for r in app\\.app\\.url_map\\.iter_rules\\(\\) if 'account' in r\\.rule\\]\\[:20\\]\\)\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^& 'f:/buisness/\\.venv/Scripts/python\\.exe' -c \"import sys;sys\\.path\\.insert\\(0,'backend'\\);import app; c=app\\.app\\.test_client\\(\\); print\\(c\\.get\\('/api/account'\\)\\.status_code, c\\.get\\('/api/account'\\)\\.json\\); print\\(c\\.get\\('/account'\\)\\.status_code, c\\.get\\('/login'\\)\\.status_code\\); print\\(c\\.get\\('/'\\)\\.status_code\\)\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^& 'f:/buisness/\\.venv/Scripts/python\\.exe' backend/app\\.py --check-db$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}

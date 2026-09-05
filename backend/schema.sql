@@ -1,0 +1,319 @@
+CREATE TABLE IF NOT EXISTS categories (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(120) NOT NULL,
+  slug VARCHAR(140) NOT NULL UNIQUE,
+  description TEXT,
+  is_active BOOLEAN NOT NULL DEFAULT TRUE,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS products (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  category_id BIGINT,
+  name VARCHAR(180) NOT NULL,
+  slug VARCHAR(200) NOT NULL UNIQUE,
+  description TEXT,
+  price DECIMAL(10,2) NOT NULL,
+  compare_at_price DECIMAL(10,2),
+  image_url TEXT,
+  stock_quantity INT NOT NULL DEFAULT 0,
+  is_active BOOLEAN NOT NULL DEFAULT TRUE,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL
+);
+
+CREATE TABLE IF NOT EXISTS users (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(160) NOT NULL,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  phone VARCHAR(30),
+  password_hash VARCHAR(255) NOT NULL,
+  role VARCHAR(30) NOT NULL DEFAULT 'CUSTOMER',
+  is_active BOOLEAN NOT NULL DEFAULT TRUE,
+  profile_image_url TEXT,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS carts (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  user_id BIGINT,
+  session_key VARCHAR(120) UNIQUE,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS cart_items (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  cart_id BIGINT NOT NULL,
+  product_id BIGINT NOT NULL,
+  quantity INT NOT NULL DEFAULT 1,
+  UNIQUE KEY cart_product (cart_id, product_id),
+  FOREIGN KEY (cart_id) REFERENCES carts(id) ON DELETE CASCADE,
+  FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS wishlists (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  user_id BIGINT NOT NULL,
+  product_id BIGINT NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY user_product (user_id, product_id),
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS orders (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  user_id BIGINT,
+  status VARCHAR(40) NOT NULL DEFAULT 'pending',
+  total DECIMAL(10,2) NOT NULL DEFAULT 0,
+  full_name VARCHAR(160) NOT NULL,
+  phone VARCHAR(30) NOT NULL,
+  address TEXT NOT NULL,
+  payment_method VARCHAR(40) NOT NULL DEFAULT 'COD',
+  payment_status VARCHAR(40) NOT NULL DEFAULT 'PENDING',
+  subtotal DECIMAL(10,2) NOT NULL DEFAULT 0,
+  delivery_charge DECIMAL(10,2) NOT NULL DEFAULT 0,
+  discount DECIMAL(10,2) NOT NULL DEFAULT 0,
+  expected_delivery DATE NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+);
+
+CREATE TABLE IF NOT EXISTS addresses (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  user_id BIGINT NOT NULL,
+  full_name VARCHAR(160) NOT NULL,
+  mobile VARCHAR(30) NOT NULL,
+  house_flat VARCHAR(180) NOT NULL,
+  street VARCHAR(180) NOT NULL,
+  area VARCHAR(180),
+  landmark VARCHAR(180),
+  city VARCHAR(120) NOT NULL,
+  state VARCHAR(120) NOT NULL,
+  pincode VARCHAR(12) NOT NULL,
+  address_type VARCHAR(20) NOT NULL DEFAULT 'HOME',
+  is_default BOOLEAN NOT NULL DEFAULT FALSE,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  INDEX user_addresses (user_id)
+);
+
+CREATE TABLE IF NOT EXISTS order_status_history (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  order_id BIGINT NOT NULL,
+  status VARCHAR(40) NOT NULL,
+  note VARCHAR(255),
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+  INDEX order_history (order_id, created_at)
+);
+
+CREATE TABLE IF NOT EXISTS transactions (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  user_id BIGINT NOT NULL,
+  order_id BIGINT,
+  transaction_id VARCHAR(80) NOT NULL UNIQUE,
+  utr VARCHAR(100) NULL,
+  payment_note TEXT NULL,
+  amount DECIMAL(10,2) NOT NULL,
+  payment_method VARCHAR(40) NOT NULL,
+  transaction_type VARCHAR(40) NOT NULL DEFAULT 'ORDER_PAYMENT',
+  status VARCHAR(40) NOT NULL DEFAULT 'COMPLETED',
+  verified_by BIGINT NULL,
+  verified_at DATETIME NULL,
+  rejection_reason VARCHAR(255) NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE SET NULL,
+  FOREIGN KEY (verified_by) REFERENCES users(id) ON DELETE SET NULL,
+  INDEX user_transactions (user_id, created_at)
+);
+
+CREATE TABLE IF NOT EXISTS notifications (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  user_id BIGINT NOT NULL,
+  order_id BIGINT,
+  order_number VARCHAR(32),
+  title VARCHAR(180) NOT NULL,
+  message TEXT NOT NULL,
+  notification_type VARCHAR(40) NOT NULL DEFAULT 'ORDER',
+  is_read BOOLEAN NOT NULL DEFAULT FALSE,
+  metadata TEXT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE SET NULL,
+  INDEX user_notifications (user_id, created_at),
+  INDEX notification_order (order_id, created_at)
+);
+
+CREATE TABLE IF NOT EXISTS recently_viewed (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  user_id BIGINT NOT NULL,
+  product_id BIGINT NOT NULL,
+  viewed_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY user_recent_product (user_id, product_id),
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS password_reset_tokens (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  user_id BIGINT NOT NULL,
+  token_hash CHAR(64) NOT NULL UNIQUE,
+  expires_at DATETIME NOT NULL,
+  used_at DATETIME NULL,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS order_items (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  order_id BIGINT NOT NULL,
+  product_id BIGINT,
+  product_name VARCHAR(180) NOT NULL,
+  quantity INT NOT NULL,
+  unit_price DECIMAL(10,2) NOT NULL,
+  FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+  FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE SET NULL
+);
+
+CREATE TABLE IF NOT EXISTS enquiries (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(160) NOT NULL,
+  email VARCHAR(255),
+  phone VARCHAR(30) NOT NULL,
+  message TEXT NOT NULL,
+  status VARCHAR(40) NOT NULL DEFAULT 'new',
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS support_conversations (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  customer_id BIGINT NOT NULL,
+  subject VARCHAR(180) NOT NULL,
+  reason VARCHAR(80),
+  order_id BIGINT NULL,
+  status VARCHAR(20) NOT NULL DEFAULT 'OPEN',
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  closed_at DATETIME NULL,
+  FOREIGN KEY (customer_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE SET NULL,
+  INDEX support_conversation_customer (customer_id, updated_at),
+  INDEX support_conversation_status (status, updated_at)
+);
+
+CREATE TABLE IF NOT EXISTS support_messages (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  conversation_id BIGINT NOT NULL,
+  sender_type VARCHAR(20) NOT NULL,
+  sender_id BIGINT NOT NULL,
+  body TEXT NOT NULL,
+  is_read BOOLEAN NOT NULL DEFAULT FALSE,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (conversation_id) REFERENCES support_conversations(id) ON DELETE CASCADE,
+  FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE,
+  INDEX support_message_conversation (conversation_id, created_at),
+  INDEX support_message_unread (conversation_id, sender_type, is_read)
+);
+
+CREATE TABLE IF NOT EXISTS banners (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(180) NOT NULL,
+  image_url TEXT,
+  link_url TEXT,
+  is_active BOOLEAN NOT NULL DEFAULT TRUE,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS settings (
+  setting_key VARCHAR(120) PRIMARY KEY,
+  setting_value TEXT,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS inventory_movements (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  product_id BIGINT NOT NULL,
+  previous_quantity INT NOT NULL,
+  new_quantity INT NOT NULL,
+  difference INT NOT NULL,
+  reason VARCHAR(255) NOT NULL,
+  admin_id BIGINT,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+  FOREIGN KEY (admin_id) REFERENCES users(id) ON DELETE SET NULL,
+  INDEX inventory_product_history (product_id, created_at)
+);
+
+CREATE TABLE IF NOT EXISTS audit_logs (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  admin_id BIGINT,
+  action VARCHAR(120) NOT NULL,
+  entity VARCHAR(80) NOT NULL,
+  entity_id VARCHAR(80),
+  old_value TEXT,
+  new_value TEXT,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (admin_id) REFERENCES users(id) ON DELETE SET NULL,
+  INDEX audit_created (created_at)
+);
+
+CREATE TABLE IF NOT EXISTS offers (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(180) NOT NULL,
+  code VARCHAR(80) UNIQUE,
+  discount_type VARCHAR(40) NOT NULL,
+  value DECIMAL(10,2) NOT NULL DEFAULT 0,
+  start_date DATETIME,
+  end_date DATETIME,
+  usage_limit INT,
+  used_count INT NOT NULL DEFAULT 0,
+  status VARCHAR(30) NOT NULL DEFAULT 'ACTIVE',
+  applicable_product_ids TEXT,
+  applicable_category_ids TEXT,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS campaigns (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(180) NOT NULL,
+  slug VARCHAR(200) NOT NULL UNIQUE,
+  description TEXT,
+  campaign_type VARCHAR(40) NOT NULL DEFAULT 'PROMOTION',
+  banner_image_url TEXT,
+  landing_url TEXT,
+  start_date DATETIME NULL,
+  end_date DATETIME NULL,
+  status VARCHAR(30) NOT NULL DEFAULT 'DRAFT',
+  budget DECIMAL(12,2) NULL,
+  created_by BIGINT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL,
+  INDEX campaign_active (status, start_date, end_date)
+);
+
+CREATE TABLE IF NOT EXISTS campaign_products (
+  campaign_id BIGINT NOT NULL,
+  product_id BIGINT NOT NULL,
+  PRIMARY KEY (campaign_id, product_id),
+  FOREIGN KEY (campaign_id) REFERENCES campaigns(id) ON DELETE CASCADE,
+  FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS product_images (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  product_id BIGINT NOT NULL,
+  image_url TEXT NOT NULL,
+  alt_text VARCHAR(255),
+  sort_order INT NOT NULL DEFAULT 0,
+  is_primary BOOLEAN NOT NULL DEFAULT FALSE,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+  INDEX product_images_order (product_id, sort_order)
+);
