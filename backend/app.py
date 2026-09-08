@@ -4247,4 +4247,4 @@ if __name__ == "__main__":
         print("MySQL connection and nakoda_db schema are ready.")
     else:
         initialize_database()
-        socketio.run(app, host="127.0.0.1", port=int(os.getenv("PORT", "5000")), debug=False)
+        socketio.run(app, host="0.0.0.0", port=int(os.getenv("PORT", "5000")), debug=False)
