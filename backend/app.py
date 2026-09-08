@@ -43,13 +43,41 @@ def add_cors_headers(response):
 
 
 def database_config():
-    return {
-        "host": os.getenv("DB_HOST", "localhost"),
-        "port": int(os.getenv("DB_PORT", "3306")),
-        "database": os.getenv("DB_NAME", "nakoda_db"),
-        "user": os.getenv("DB_USERNAME", "root"),
+    values = {
+        "host": os.getenv("DB_HOST", "localhost").strip(),
+        "port": os.getenv("DB_PORT", "3306").strip(),
+        "database": os.getenv("DB_NAME", "nakoda_db").strip(),
+        "user": os.getenv("DB_USERNAME", "root").strip(),
         "password": os.getenv("DB_PASSWORD", ""),
+    }
+    required = {
+        "DB_HOST": values["host"],
+        "DB_NAME": values["database"],
+        "DB_USERNAME": values["user"],
+        "DB_PASSWORD": values["password"],
+    }
+    if os.getenv("RENDER") or os.getenv("RENDER_SERVICE_ID"):
+        missing = [name for name, value in required.items() if not value]
+        if missing:
+            raise RuntimeError(
+                "Missing required database environment variable(s): "
+                + ", ".join(missing)
+                + ". Configure the hosted MySQL connection in Render Environment Variables."
+            )
+    try:
+        port = int(values["port"])
+    except ValueError as exc:
+        raise RuntimeError("DB_PORT must be a valid integer.") from exc
+    if not 1 <= port <= 65535:
+        raise RuntimeError("DB_PORT must be between 1 and 65535.")
+    return {
+        "host": values["host"],
+        "port": port,
+        "database": values["database"],
+        "user": values["user"],
+        "password": values["password"],
         "autocommit": False,
+        "connection_timeout": int(os.getenv("DB_CONNECTION_TIMEOUT", "10")),
     }
 
 
@@ -57,7 +85,14 @@ def connect(database=True):
     config = database_config()
     if not database:
         config.pop("database")
-    return mysql.connector.connect(**config)
+    try:
+        connection = mysql.connector.connect(**config)
+        return connection
+    except mysql.connector.Error as exc:
+        raise RuntimeError(
+            "MySQL connection failed. Verify DB_HOST, DB_PORT, database name, "
+            "username, password, and network access."
+        ) from exc
 
 
 def initialize_database():
@@ -88,6 +123,7 @@ def initialize_database():
 
     ensure_seed_data()
     ensure_schema_migrations()
+    print("MySQL database connection established successfully.")
     ensure_relevant_product_images()
 
 
