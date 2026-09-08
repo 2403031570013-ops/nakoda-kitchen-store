@@ -89,10 +89,21 @@ def connect(database=True):
         connection = mysql.connector.connect(**config)
         return connection
     except mysql.connector.Error as exc:
-        raise RuntimeError(
-            "MySQL connection failed. Verify DB_HOST, DB_PORT, database name, "
-            "username, password, and network access."
-        ) from exc
+        message = str(exc).lower()
+        if "name or service not known" in message or "nodename nor servname" in message:
+            detail = "MySQL hostname could not be resolved. Check DB_HOST in Render."
+        elif "access denied" in message:
+            detail = "MySQL authentication failed. Check DB_USERNAME and DB_PASSWORD."
+        elif "unknown database" in message:
+            detail = "MySQL database was not found. Check DB_NAME."
+        elif "timed out" in message or "can't connect" in message:
+            detail = "Could not connect to MySQL server. Check DB_HOST and DB_PORT."
+        else:
+            detail = (
+                "MySQL connection failed. Verify DB_HOST, DB_PORT, database name, "
+                "username, password, and network access."
+            )
+        raise RuntimeError(detail) from exc
 
 
 def initialize_database():
