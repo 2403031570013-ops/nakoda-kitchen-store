@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS products (
   category_id BIGINT,
   name VARCHAR(180) NOT NULL,
   slug VARCHAR(200) NOT NULL UNIQUE,
+  sku VARCHAR(255) NULL,
   description TEXT,
   price DECIMAL(10,2) NOT NULL,
   compare_at_price DECIMAL(10,2),

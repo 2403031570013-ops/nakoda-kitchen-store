@@ -132,8 +132,9 @@ def initialize_database():
     finally:
         connection.close()
 
-    ensure_seed_data()
+    # Apply compatibility migrations before seed inserts reference upgraded columns.
     ensure_schema_migrations()
+    ensure_seed_data()
     print("MySQL database connection established successfully.")
     ensure_relevant_product_images()
 
@@ -152,7 +153,7 @@ def ensure_schema_migrations():
         "ALTER TABLE orders ADD COLUMN expected_delivery DATE NULL",
         "ALTER TABLE users ADD COLUMN last_login DATETIME NULL",
         "ALTER TABLE users ADD COLUMN is_active BOOLEAN NOT NULL DEFAULT TRUE",
-        "ALTER TABLE products ADD COLUMN sku VARCHAR(80) NULL",
+        "ALTER TABLE products ADD COLUMN sku VARCHAR(255) NULL",
         "ALTER TABLE products ADD COLUMN short_description TEXT NULL",
         "ALTER TABLE products ADD COLUMN brand VARCHAR(120) NULL",
         "ALTER TABLE products ADD COLUMN subcategory VARCHAR(120) NULL",
