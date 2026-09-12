@@ -4037,6 +4037,15 @@ def support_response(conversation, unread_count=None):
     }
 
 
+def support_socket_message(message):
+    """Return a JSON-safe support message for Socket.IO clients."""
+    message = dict(message)
+    created_at = message.get("created_at")
+    if hasattr(created_at, "isoformat"):
+        message["created_at"] = created_at.isoformat()
+    return message
+
+
 def support_order_id(value):
     value = str(value or "").strip()
     if not value:
@@ -4164,7 +4173,7 @@ def support_customer_reply(payload, conversation_id):
         notify_admins(cursor, "New support message", conversation["subject"], "SUPPORT", conversation.get("order_id"))
         connection.commit()
         detail = support_conversation_detail(cursor, conversation_id, user_id=user_id)
-        message = detail["messages"][-1]
+        message = support_socket_message(detail["messages"][-1])
         socketio.emit(
             "support_message",
             {"conversation_id": conversation_id, "message": message},
@@ -4290,7 +4299,7 @@ def admin_support_reply(payload, conversation_id):
         )
         connection.commit()
         detail = support_conversation_detail(cursor, conversation_id, admin=True)
-        message = detail["messages"][-1]
+        message = support_socket_message(detail["messages"][-1])
         socketio.emit(
             "support_message",
             {"conversation_id": conversation_id, "message": message},
