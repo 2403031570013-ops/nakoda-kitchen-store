@@ -4165,12 +4165,12 @@ def support_customer_reply(payload, conversation_id):
         connection.commit()
         detail = support_conversation_detail(cursor, conversation_id, user_id=user_id)
         message = detail["messages"][-1]
-        emit(
+        socketio.emit(
             "support_message",
             {"conversation_id": conversation_id, "message": message},
             to=f"support:{conversation_id}",
         )
-        emit(
+        socketio.emit(
             "support_message",
             {"conversation_id": conversation_id, "message": message},
             to="admin:support",
@@ -4291,7 +4291,7 @@ def admin_support_reply(payload, conversation_id):
         connection.commit()
         detail = support_conversation_detail(cursor, conversation_id, admin=True)
         message = detail["messages"][-1]
-        emit(
+        socketio.emit(
             "support_message",
             {"conversation_id": conversation_id, "message": message},
             to=f"support:{conversation_id}",
