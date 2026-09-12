@@ -941,7 +941,7 @@
         </div>
       </section>
       <section class="owner-card">
-        <img src="http://127.0.0.1:5000/uploads/nakoda-owner.jpe" alt="Nakoda business owner" />
+        <img src="https://nakoda-api.onrender.com/uploads/nakoda-owner.jpe" alt="Nakoda business owner" />
         <div>
           <span class="eyebrow">The family behind Nakoda</span>
           <h3>Built with care for every home.</h3>
@@ -1126,10 +1126,12 @@
     <div class="toast" id="toast"></div>
 
     <script>
-      const API_BASE = window.NAKODA_API_BASE || 'http://127.0.0.1:5000';
+      // Override this at deploy time with window.NAKODA_API_BASE when needed.
+      const API_BASE = (window.NAKODA_API_BASE || 'https://nakoda-api.onrender.com').replace(/\/$/, '');
       const state = {
         categories: [],
         products: [],
+        isError: false,
         cart: [],
         selectedCategory: 'all',
         sort: 'featured',
@@ -1212,6 +1214,11 @@
           const data = await res.json().catch(() => ({}));
           if (!res.ok) throw new Error(data.error || 'Request failed');
           return data;
+        }).catch((error) => {
+          if (error instanceof TypeError) {
+            throw new Error('Unable to reach the Nakoda server. Please check your connection and try again.');
+          }
+          throw error;
         });
       }
 
@@ -1269,14 +1276,23 @@
           page: String(state.page),
           size: '24'
         });
-        const result = await fetchJson(`${API_BASE}/api/products?${params.toString()}`);
-        state.products = result.items || [];
-        state.pages = result.pages || 1;
-        const productCount = document.getElementById('productCount');
-        if (productCount) {
-          productCount.textContent = `${Number(result.total || 0).toLocaleString('en-IN')} products`;
+        try {
+          const result = await fetchJson(`${API_BASE}/api/products?${params.toString()}`);
+          state.isError = false;
+          state.products = result.items || [];
+          state.pages = result.pages || 1;
+          const productCount = document.getElementById('productCount');
+          if (productCount) {
+            productCount.textContent = `${Number(result.total || 0).toLocaleString('en-IN')} products`;
+          }
+          renderProducts();
+        } catch (error) {
+          state.isError = true;
+          state.products = [];
+          renderProducts();
+          showToast(error.message);
+          return;
         }
-        renderProducts();
         const sharedProduct = new URLSearchParams(window.location.search).get('product');
         if (!state.sharedProductOpened && sharedProduct) {
           let match = state.products.find((item) => String(item.id) === sharedProduct || item.slug === sharedProduct);
@@ -1391,6 +1407,10 @@
       }
 
       function renderProducts() {
+        if (state.isError) {
+          productGrid.innerHTML = '<div style="grid-column:1/-1; padding:40px 20px; text-align:center; border:1px dashed var(--line); border-radius:24px; color:var(--danger); background:rgba(255,255,255,0.6);">Products are temporarily unavailable. Please try again in a moment.</div>';
+          return;
+        }
         if (!state.products.length) {
           productGrid.innerHTML = '<div style="grid-column:1/-1; padding:40px 20px; text-align:center; border:1px dashed var(--line); border-radius:24px; color:var(--muted); background:rgba(255,255,255,0.6);">No products match your search or filters.</div>';
           return;
@@ -1809,7 +1829,7 @@
           if (next) { window.location.href = next; return; }
           showToast(state.authMode === 'login' ? 'Welcome back!' : 'Account created successfully');
         } catch (error) {
-          showToast(error.message);
+          showToast(error.message || 'Unable to complete authentication. Please try again.');
           loadBotChallenge();
         }
       });

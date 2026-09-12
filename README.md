@@ -26,7 +26,12 @@ python app.py --check-db
 python app.py
 ```
 
-The API is available at `http://127.0.0.1:5000/api`.
+The local API is available at `http://127.0.0.1:5000/api`. The deployed static
+frontend uses `https://nakoda-api.onrender.com` by default; set
+`window.NAKODA_API_BASE` before the application scripts if the Render service
+URL changes. On Vercel, configure the same URL as `VITE_API_URL` if the
+frontend is later migrated to a Vite build (this repository currently serves
+static HTML and does not evaluate `import.meta.env`).
 
 ## Admin control center
 

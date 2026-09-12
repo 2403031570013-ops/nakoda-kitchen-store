@@ -30,13 +30,29 @@ app = Flask(
     static_folder=str(BASE_DIR / "static"),
 )
 app.config["SECRET_KEY"] = os.getenv("JWT_SECRET", "nakoda-development-secret-key-please-change")
-socketio = SocketIO(app, cors_allowed_origins="*", async_mode="threading")
+FRONTEND_ORIGIN = os.getenv("FRONTEND_ORIGIN", "https://nakoda-kitchen-store.vercel.app").rstrip("/")
+ALLOWED_ORIGINS = {
+    FRONTEND_ORIGIN,
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+}
+socketio = SocketIO(app, cors_allowed_origins=list(ALLOWED_ORIGINS), async_mode="threading")
 SOCKET_USERS = {}
+
+
+@app.before_request
+def handle_preflight():
+    if request.method == "OPTIONS":
+        return ("", 204)
 
 
 @app.after_request
 def add_cors_headers(response):
-    response.headers["Access-Control-Allow-Origin"] = "*"
+    origin = request.headers.get("Origin")
+    if origin in ALLOWED_ORIGINS:
+        response.headers["Access-Control-Allow-Origin"] = origin
+        response.headers["Access-Control-Allow-Credentials"] = "true"
+        response.headers.add("Vary", "Origin")
     response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
     response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, PATCH, DELETE, OPTIONS"
     return response
