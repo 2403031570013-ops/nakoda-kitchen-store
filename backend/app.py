@@ -879,7 +879,10 @@ def socket_disconnect():
 @socketio.on("support_join")
 def socket_support_join(data):
         identity = SOCKET_USERS.get(request.sid)
-        conversation_id = int((data or {}).get("conversation_id") or 0)
+        try:
+            conversation_id = int((data or {}).get("conversation_id") or 0)
+        except (TypeError, ValueError):
+            conversation_id = 0
         if not identity or not conversation_id or not socket_conversation_allowed(
             conversation_id, identity["user_id"], identity["role"]
         ):
@@ -892,7 +895,10 @@ def socket_support_join(data):
 def socket_call_invite(data):
         identity = SOCKET_USERS.get(request.sid)
         data = data or {}
-        conversation_id = int(data.get("conversation_id") or 0)
+        try:
+            conversation_id = int(data.get("conversation_id") or 0)
+        except (TypeError, ValueError):
+            conversation_id = 0
         if not identity or not conversation_id or not socket_conversation_allowed(
             conversation_id, identity["user_id"], identity["role"]
         ):
@@ -928,7 +934,10 @@ def socket_call_invite(data):
 def socket_call_response(data):
         identity = SOCKET_USERS.get(request.sid)
         data = data or {}
-        conversation_id = int(data.get("conversation_id") or 0)
+        try:
+            conversation_id = int(data.get("conversation_id") or 0)
+        except (TypeError, ValueError):
+            conversation_id = 0
         if not identity or not conversation_id or not socket_conversation_allowed(
             conversation_id, identity["user_id"], identity["role"]
         ):
@@ -955,7 +964,10 @@ def socket_call_response(data):
 def socket_call_state(data):
         identity = SOCKET_USERS.get(request.sid)
         data = data or {}
-        conversation_id = int(data.get("conversation_id") or 0)
+        try:
+            conversation_id = int(data.get("conversation_id") or 0)
+        except (TypeError, ValueError):
+            conversation_id = 0
         if not identity or not conversation_id or not socket_conversation_allowed(
             conversation_id, identity["user_id"], identity["role"]
         ):
@@ -978,7 +990,10 @@ def socket_call_state(data):
 def socket_call_signal(data):
         identity = SOCKET_USERS.get(request.sid)
         data = data or {}
-        conversation_id = int(data.get("conversation_id") or 0)
+        try:
+            conversation_id = int(data.get("conversation_id") or 0)
+        except (TypeError, ValueError):
+            conversation_id = 0
         if not identity or not conversation_id or not socket_conversation_allowed(
             conversation_id, identity["user_id"], identity["role"]
         ):
@@ -1001,7 +1016,10 @@ def socket_call_signal(data):
 def socket_call_end(data):
         identity = SOCKET_USERS.get(request.sid)
         data = data or {}
-        conversation_id = int(data.get("conversation_id") or 0)
+        try:
+            conversation_id = int(data.get("conversation_id") or 0)
+        except (TypeError, ValueError):
+            conversation_id = 0
         if identity and conversation_id and socket_conversation_allowed(
             conversation_id, identity["user_id"], identity["role"]
         ):
@@ -4132,8 +4150,12 @@ def support_customer_reply(payload, conversation_id):
         conversation = cursor.fetchone()
         if not conversation:
             return jsonify({"error": "Conversation not found."}), 404
+        # Closing archives the thread, but a new customer message reopens it.
         if conversation["status"] == "CLOSED":
-            return jsonify({"error": "Conversation is closed."}), 409
+            cursor.execute(
+                "UPDATE support_conversations SET status='OPEN', closed_at=NULL WHERE id=%s",
+                (conversation_id,),
+            )
         cursor.execute(
             "INSERT INTO support_messages (conversation_id,sender_type,sender_id,body) VALUES (%s,'CUSTOMER',%s,%s)",
             (conversation_id, user_id, body),
@@ -4142,6 +4164,17 @@ def support_customer_reply(payload, conversation_id):
         notify_admins(cursor, "New support message", conversation["subject"], "SUPPORT", conversation.get("order_id"))
         connection.commit()
         detail = support_conversation_detail(cursor, conversation_id, user_id=user_id)
+        message = detail["messages"][-1]
+        emit(
+            "support_message",
+            {"conversation_id": conversation_id, "message": message},
+            to=f"support:{conversation_id}",
+        )
+        emit(
+            "support_message",
+            {"conversation_id": conversation_id, "message": message},
+            to="admin:support",
+        )
         return jsonify(support_response(detail, unread_count=0) | {
             "success": True, "message_id": message_id,
         }), 201
@@ -4240,8 +4273,12 @@ def admin_support_reply(payload, conversation_id):
         conversation = cursor.fetchone()
         if not conversation:
             return jsonify({"error": "Conversation not found."}), 404
+        # Closing archives the thread, but a new admin reply reopens it.
         if conversation["status"] == "CLOSED":
-            return jsonify({"error": "Conversation is closed."}), 409
+            cursor.execute(
+                "UPDATE support_conversations SET status='OPEN', closed_at=NULL WHERE id=%s",
+                (conversation_id,),
+            )
         cursor.execute(
             "INSERT INTO support_messages (conversation_id,sender_type,sender_id,body) VALUES (%s,'ADMIN',%s,%s)",
             (conversation_id, admin_user_id, body),
@@ -4253,6 +4290,12 @@ def admin_support_reply(payload, conversation_id):
         )
         connection.commit()
         detail = support_conversation_detail(cursor, conversation_id, admin=True)
+        message = detail["messages"][-1]
+        emit(
+            "support_message",
+            {"conversation_id": conversation_id, "message": message},
+            to=f"support:{conversation_id}",
+        )
         return jsonify(support_response(detail, unread_count=0) | {
             "success": True, "message_id": message_id,
         }), 201
